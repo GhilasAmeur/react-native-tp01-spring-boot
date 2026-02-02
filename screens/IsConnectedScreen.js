@@ -1,6 +1,7 @@
 import { Text } from "react-native"
 import { ButtonCustom, HeaderTittle } from "../components"
 import { ScreenWrapper } from "../utils/ScreenWrapper"
+import { ProfilScreen } from "./ProfilScreen"
 export const IsConnectedScreen = ({navigation, route}) =>{
 
   const {user} = route.params
@@ -10,6 +11,7 @@ export const IsConnectedScreen = ({navigation, route}) =>{
         <Text>
           Bienvenue {user.nom.toUpperCase()} sur note application de connexion inscription.
         </Text>
+        <ButtonCustom text="MON PROFIL" onPress={() => navigation.navigate("Profil")}/>
         <ButtonCustom text="DÉCONNEXION" secondary 
         onPress={() =>navigation.navigate("Connexion")}/>
       </ScreenWrapper>

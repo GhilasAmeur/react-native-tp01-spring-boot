@@ -5,6 +5,7 @@ import { ConnexionScrenn } from "../screens/ConnexionScreen";
 import { InscriptionScreen } from "../screens/InscriptionScreen";
 import { ForgetPasswordScreen } from "../screens/ForgetPasswordScreen";
 import { IsConnectedScreen } from "../screens/IsConnectedScreen";
+import { ProfilScreen } from "../screens/ProfilScreen";
 
 
 const Stack = createNativeStackNavigator()
@@ -37,6 +38,11 @@ export default function StackNavigation (){
           <Stack.Screen
             name="IsConnected"
             component={IsConnectedScreen}
+            options={{ headerShown: true }}
+          />
+          <Stack.Screen
+            name="Profil"
+            component={ProfilScreen}
             options={{ headerShown: true }}
           />
         </Stack.Navigator>

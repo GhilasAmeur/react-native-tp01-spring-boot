@@ -21,7 +21,7 @@ console.log("cc");
       return;
     }
 
-    await fetch("http://192.168.0.16:8080/user/adduser", {
+    await fetch("http://10.31.252.208:8080/user/adduser", {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
@@ -35,13 +35,12 @@ console.log("cc");
 
   const updatePassword = async (email, password) => {
 
-    const response = await fetch("http://192.168.0.16:8080/user/update", {
+    const response = await fetch("http://10.31.252.208:8080/user/update", {
       method: "PUT",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
         email,
-        password
-        
+        password,
       }),
     });
     if(!response.ok){
@@ -61,7 +60,7 @@ console.log("cc");
         return
     }
     
-    const response = await fetch("http://192.168.0.16:8080/user/login", {
+    const response = await fetch("http://10.31.252.208:8080/user/login", {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
