@@ -10,7 +10,7 @@ export const userService = () => {
       alert("Veuillez remplir tous les champs.");
       return;
     }
-console.log("cc");
+      console.log("cc");
     if (!checkEmail(email)) {
       alert("Veuillez saisir un email valide");
       return;
@@ -21,13 +21,13 @@ console.log("cc");
       return;
     }
 
-    await fetch("http://10.31.252.208:8080/user/adduser", {
+    await fetch("http://10.0.2.2:8080/user/adduser", {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
         nom,
-        password,
         email,
+        password,
       }),
     });
     alert("Utilisateur ajouté avec succès.");
@@ -35,7 +35,7 @@ console.log("cc");
 
   const updatePassword = async (email, password) => {
 
-    const response = await fetch("http://10.31.252.208:8080/user/update", {
+    const response = await fetch("http://10.0.2.2:8080/user/update", {
       method: "PUT",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
@@ -52,6 +52,46 @@ console.log("cc");
     alert("Mot de passe modifier avec succès.");
   };
 
+  const updateProfile = async (id, nom, email) => {
+
+    if (!nom.trim() || !checkEmail(email)) {
+      alert("Nom vide ou email invalide.");
+      return
+    }
+    const response = await fetch(
+      `http://10.0.2.2:8080/user/update/profil/${id}`,
+      {
+        method: "PUT",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ nom, email }),
+      },
+    );
+
+    if (!response.ok) {
+      const errMessage = await response.text();
+      alert(errMessage);
+      return;
+    }
+
+    alert("Profil mis à jour avec succès.");
+    return await response.json();
+    
+  };
+
+const deleteProfile = async (id) =>{
+
+ 
+  const response  = await fetch (`http://10.0.2.2:8080/user/delete/${id}`, {
+    method : "DELETE",
+
+  })
+  if (!response.ok) {
+    const errMessage = await response.text();
+    alert(errMessage);
+    return;
+  }
+  alert("compte supprimer avec succès")
+}
   
   const connexion = async (email, password) => {
 
@@ -60,7 +100,7 @@ console.log("cc");
         return
     }
     
-    const response = await fetch("http://10.31.252.208:8080/user/login", {
+    const response = await fetch("http://10.0.2.2:8080/user/login", {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
@@ -86,5 +126,13 @@ console.log("cc");
     return regexPassword.test(password);
   };
 
-  return { checkEmail, checkPassword, inscription, connexion, updatePassword };
+  return {
+    checkEmail,
+    checkPassword,
+    inscription,
+    connexion,
+    updatePassword,
+    updateProfile,
+    deleteProfile,
+  };
 }

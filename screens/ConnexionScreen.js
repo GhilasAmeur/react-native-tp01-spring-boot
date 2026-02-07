@@ -11,13 +11,10 @@ export const ConnexionScrenn = ({navigation, route}) =>{
   const [password, setPassword] = useState("")
 const handleConnexion = async () =>{
 
-
   const user  = await connexion(email, password)
   if(!user) return
   navigation.navigate("IsConnected", {user})
 
- 
-  
 }
 
     return (
